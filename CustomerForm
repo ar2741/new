@@ -1,0 +1,57 @@
+import { useState, useEffect } from 'react';
+import { useNavigate, useParams, Link } from 'react-router-dom';
+
+export default function CustomerForm({ customers, setCustomers }) {
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  const editing = Boolean(id);
+  const existingCustomer = editing ? customers.find(c => c.id === parseInt(id)) : {};
+
+  const [firstName, setFirstName] = useState(existingCustomer?.firstName || '');
+  const [lastName, setLastName] = useState(existingCustomer?.lastName || '');
+  const [email, setEmail] = useState(existingCustomer?.email || '');
+  const [phone, setPhone] = useState(existingCustomer?.phone || '');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!firstName || !lastName || !email) {
+      alert('Please fill all required fields');
+      return;
+    }
+
+    if (editing) {
+      setCustomers(customers.map(c => c.id === parseInt(id) ? { ...c, firstName, lastName, email, phone } : c));
+    } else {
+      const newId = Math.max(...customers.map(c => c.id)) + 1;
+      setCustomers([...customers, { id: newId, firstName, lastName, email, phone, accounts: [] }]);
+    }
+    navigate('/customers');
+  };
+
+  return (
+    <div>
+      <Link to="/customers">Back to Customers List</Link>
+      <h2>{editing ? 'Edit' : 'Add'} Customer</h2>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>First Name: </label>
+          <input value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+        </div>
+        <div>
+          <label>Last Name: </label>
+          <input value={lastName} onChange={(e) => setLastName(e.target.value)} />
+        </div>
+        <div>
+          <label>Email: </label>
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        </div>
+        <div>
+          <label>Phone: </label>
+          <input value={phone} onChange={(e) => setPhone(e.target.value)} />
+        </div>
+        <button type="submit">{editing ? 'Update' : 'Create'} Customer</button>
+      </form>
+    </div>
+  );
+}
