@@ -1,1 +1,12 @@
+import { Link } from 'react-router-dom';
+
+export default function Navbar() {
+  return (
+    <nav style={{ backgroundColor: '#222', padding: '10px' }}>
+      <Link to="/" style={{ color: 'white', marginRight: '20px' }}>Home</Link>
+      <Link to="/customers" style={{ color: 'white', marginRight: '20px' }}>Customers</Link>
+      <Link to="/about" style={{ color: 'white' }}>About</Link>
+    </nav>
+  );
+}
 
