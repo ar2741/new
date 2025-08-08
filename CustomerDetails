@@ -1,0 +1,37 @@
+import { Link, useParams } from 'react-router-dom';
+
+export default function CustomerDetails({ customers }) {
+  const { id } = useParams();
+  const customer = customers.find(c => c.id === parseInt(id));
+
+  if (!customer) return <h2>Customer not found</h2>;
+
+  return (
+    <div>
+      <Link to="/customers">Back to Customers List</Link>
+      <h2>Customer Details</h2>
+      <p>ID: {customer.id}</p>
+      <p>First Name: {customer.firstName}</p>
+      <p>Last Name: {customer.lastName}</p>
+      <p>Email: {customer.email}</p>
+      <p>Phone: {customer.phone || 'N/A'}</p>
+
+      <h3>List of Accounts</h3>
+      <table border="1" cellPadding="8">
+        <thead>
+          <tr><th>Account No</th><th>Type</th><th>Branch</th><th>Balance</th></tr>
+        </thead>
+        <tbody>
+          {customer.accounts.map((acc, index) => (
+            <tr key={index}>
+              <td>{acc.accNo}</td>
+              <td>{acc.type}</td>
+              <td>{acc.branch}</td>
+              <td>{acc.balance}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
