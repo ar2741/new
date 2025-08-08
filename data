@@ -1,0 +1,14 @@
+export const customersData = [
+  {  
+    id: 1, firstName: 'Elon', lastName: 'Musk',  
+    email: 'elon.musk@tesla.com', phone: '',  
+    accounts: [
+      { accNo: 2001999, type: 'SAVINGS_ACCOUNT', branch: 'Bandra', balance: 5000 },
+      { accNo: 2001888, type: 'CURRENT_ACCOUNT', branch: 'Andheri', balance: 8000 }
+    ]
+  },
+  { id: 2, firstName: 'Tim', lastName: 'Cook', email: 'tim.cook@apple.com', phone: '', accounts: [] },
+  { id: 3, firstName: 'Mark', lastName: 'Zuckerberg', email: 'mark.zuckerberg@meta.com', phone: '', accounts: [] },
+  { id: 4, firstName: 'Susan', lastName: 'Wojcicki', email: 'susan.wojcicki@youtube.com', phone: '', accounts: [] },
+  { id: 5, firstName: 'Reed', lastName: 'Hastings', email: 'reed.hastings@netflix.com', phone: '', accounts: [] },
+];
